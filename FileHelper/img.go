@@ -6,7 +6,7 @@ import (
 	"image/jpeg"
 	"image/png"
 	"os"
-	"github.com/qnsoft/web_api/utils/ErrorHelper"
+	"github.com/qnsoft/utils/ErrorHelper"
 )
 
 /*

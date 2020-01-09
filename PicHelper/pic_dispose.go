@@ -18,7 +18,7 @@ import (
 	"math"
 	"os"
 
-	"github.com/qnsoft/web_api/utils/ErrorHelper"
+	"github.com/qnsoft/utils/ErrorHelper"
 
 	"github.com/golang/freetype"
 	"github.com/nfnt/resize"

@@ -7,7 +7,8 @@ import (
 	"runtime/debug"
 	"strconv"
 	"time"
-	"github.com/qnsoft/web_api/utils/WebHelper"
+
+	"github.com/qnsoft/utils/WebHelper"
 
 	"github.com/astaxie/beego"
 )

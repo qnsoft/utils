@@ -2,7 +2,7 @@ package DbHelper
 
 import (
 	"fmt"
-	"github.com/qnsoft/web_api/utils/ErrorHelper"
+	"github.com/qnsoft/utils/ErrorHelper"
 
 	"github.com/astaxie/beego"
 	"gopkg.in/mgo.v2"

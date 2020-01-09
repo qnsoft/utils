@@ -10,8 +10,8 @@ import (
 	"errors"
 	"net/url"
 
-	"github.com/qnsoft/web_api/utils/ErrorHelper"
-	php2go "github.com/qnsoft/web_api/utils/Php2go"
+	"github.com/qnsoft/utils/ErrorHelper"
+	php2go "github.com/qnsoft/utils/Php2go"
 
 	"github.com/qnsoft/mahonia"
 )

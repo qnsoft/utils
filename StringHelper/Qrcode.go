@@ -3,8 +3,8 @@ package StringHelper
 import (
 	"image/png"
 	"os"
-	"github.com/qnsoft/web_api/utils/ErrorHelper"
-	"github.com/qnsoft/web_api/utils/FileHelper"
+	"github.com/qnsoft/utils/ErrorHelper"
+	"github.com/qnsoft/utils/FileHelper"
 
 	"github.com/astaxie/beego"
 	"github.com/boombuler/barcode"

@@ -11,7 +11,7 @@ import (
 	"math"
 	"math/rand"
 	"net/http"
-	"github.com/qnsoft/web_api/utils/ErrorHelper"
+	"github.com/qnsoft/utils/ErrorHelper"
 
 	"github.com/BurntSushi/graphics-go/graphics"
 	"github.com/astaxie/beego"
