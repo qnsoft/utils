@@ -1,0 +1,99 @@
+package DbHelper
+
+import (
+	"database/sql"
+	"fmt"
+
+	_ "github.com/mattn/go-sqlite3"
+)
+
+/*
+*@mongodb数据库对象
+ */
+func Db() *sql.DB {
+	_db, err := sql.Open("database::bd_type", "database::db_path")
+	CheckErr(err)
+	return _db
+}
+
+/*
+*@查询数据返回行
+*@_strsql sql语句
+*@args 查询条件参数组
+ */
+func Query(_strsql string, args ...interface{}) *sql.Rows {
+	rows, err := Db().Query(_strsql, args)
+	CheckErr(err)
+	/*
+		for rows.Next() {
+			var uid int
+			var username string
+			var department string
+			var created string
+			err = rows.Scan(&uid, &username, &department, &created)
+			checkErr(err)
+			fmt.Println(uid)
+			fmt.Println(username)
+			fmt.Println(department)
+			fmt.Println(created)
+		}
+	*/
+	return rows
+}
+
+/*
+*@增加数据
+*@_strsql sql语句
+*@args 查询条件参数组
+ */
+func Update(_strsql string, args ...interface{}) int64 {
+	stmt, err := Db().Prepare(_strsql)
+	CheckErr(err)
+	res, err := stmt.Exec(args)
+	CheckErr(err)
+	affect, err := res.RowsAffected()
+	CheckErr(err)
+	return affect
+}
+
+/*
+*@修改数据
+*@_strsql sql语句
+*@args 查询条件参数组
+ */
+func Add(_strsql string, args ...interface{}) int64 {
+	stmt, err := Db().Prepare(_strsql)
+	CheckErr(err)
+	res, err := stmt.Exec(args)
+	CheckErr(err)
+	id, err := res.LastInsertId()
+	CheckErr(err)
+	Db().Close()
+	return id
+}
+
+/*
+*@删除数据
+*@_strsql sql语句
+*@args 查询条件参数组
+ */
+func Delete(_strsql string, args ...interface{}) int64 {
+	stmt, err := Db().Prepare(_strsql)
+	CheckErr(err)
+	res, err := stmt.Exec(args)
+	CheckErr(err)
+	affect, err := res.RowsAffected()
+	CheckErr(err)
+	fmt.Println(affect)
+	Db().Close()
+	return affect
+}
+
+/*
+*@检查错误函数
+ */
+func CheckErr(err error) {
+	if err != nil {
+		fmt.Println(err)
+	}
+}
