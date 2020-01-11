@@ -3,7 +3,6 @@ package ErrorHelper
 import (
 	"fmt"
 
-	_ "github.com/mattn/go-sqlite3"
 	"github.com/wonderivan/logger"
 )
 
