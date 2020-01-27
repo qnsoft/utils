@@ -1,9 +1,13 @@
-#ignore compile file
+﻿#ignore compile file
 
 .idea
 .vscode
 logs/*.log
 /uplaod/*
 conf/*.conf
+vendor/*
+go.mod
+go.sum
+main.go
 #vue2+webpack2生成的文件
  
