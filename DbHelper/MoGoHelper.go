@@ -2,6 +2,7 @@ package DbHelper
 
 import (
 	"fmt"
+
 	"github.com/qnsoft/utils/ErrorHelper"
 
 	"github.com/astaxie/beego"
@@ -13,6 +14,7 @@ import (
  */
 func ConnectionDb() (*mgo.Database, *mgo.Session) {
 	mgo_url := beego.AppConfig.String("database_mongo::db_path")
+	db_name := beego.AppConfig.String("database_mongo::db_name")
 	session, err := mgo.Dial(mgo_url)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -21,7 +23,7 @@ func ConnectionDb() (*mgo.Database, *mgo.Session) {
 		panic(err)
 	}
 	session.SetMode(mgo.Monotonic, true) //这里需要写清楚链接模式
-	db := session.DB("QN_CMS")           //数据库名称
+	db := session.DB(db_name)            //数据库名称
 	return db, session
 }
 
