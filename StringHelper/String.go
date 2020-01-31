@@ -7,7 +7,12 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	"github.com/mozillazg/go-pinyin"
+
+	pinyin "github.com/mozillazg/go-pinyin"
+)
+
+var (
+	a = pinyin.NewArgs()
 )
 
 //生成随机字符串(数字+大写小字母)
@@ -65,6 +70,14 @@ func GetBetweenStr(_str, start, end string) string {
 	}
 	_str = string([]byte(_str)[:m])
 	return _str
+}
+
+/*
+获取拼音首字母
+*/
+func FirstLetterOfPinYin(r rune) string {
+	result := pinyin.Pinyin(string(r), a)
+	return string(result[0][0][0])
 }
 
 /*
