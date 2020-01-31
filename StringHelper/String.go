@@ -3,9 +3,11 @@ package StringHelper
 import (
 	"fmt"
 	"math/rand"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
+	"github.com/mozillazg/go-pinyin"
 )
 
 //生成随机字符串(数字+大写小字母)
@@ -63,4 +65,37 @@ func GetBetweenStr(_str, start, end string) string {
 	}
 	_str = string([]byte(_str)[:m])
 	return _str
+}
+
+/*
+@字符是否中文
+@str要识别的字符
+*/
+func IsZhCn(str string) bool {
+	hzRegexp := regexp.MustCompile("^[\u4e00-\u9fa5]$")
+	return hzRegexp.MatchString(str)
+}
+
+/*
+@获取首字母
+@str要取首字母的字符
+*/
+func GetFA(str string) string {
+	hh := []rune(str)
+	return FirstLetterOfPinYin(hh[0])
+}
+
+/*
+@中英文混合截取
+@str截取的字符串
+@length 截取的长度
+@dian 截取后补充的字符
+*/
+func SubstrByByte(str string, length int, dian string) string {
+	arry := []rune(str)
+	if len(arry) > length {
+		return string([]rune(str)[0:length]) + dian
+	} else {
+		return string([]rune(str)[0:length])
+	}
 }
