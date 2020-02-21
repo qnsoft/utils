@@ -55,36 +55,6 @@ func Verify(param ConfigJsonBody) bool {
 	return _rt
 }
 
-////////////-----以下是老的------------
-//创建base64数字验证码配置
-// var config_Digit = base64Captcha.DriverDigit{
-// 	Height:   80,
-// 	Width:    240,
-// 	MaxSkew:  0.7,
-// 	DotCount: 80,
-// 	Length:   4,
-// }
-
-// //创建base64数字验证码配置
-// var config_Character = base64Captcha.DriverMath{
-// 	Mode:             3,     //样式  base64Captcha.CaptchaModeNumberAlphabet,//CaptchaModeNumber:数字,CaptchaModeAlphabet:字母,CaptchaModeArithmetic:算术,CaptchaModeNumberAlphabet:数字字母混合.
-// 	Height:           80,    //高
-// 	Width:            240,   //宽
-// 	IsUseSimpleFont:  true,  //是否使用字体
-// 	IsShowHollowLine: false, //显示空心横线
-// 	IsShowNoiseDot:   true,  // 显示噪声干扰点
-// 	IsShowNoiseText:  false, //显示噪声干扰字符
-// 	IsShowSlimeLine:  false, //显示细线
-// 	IsShowSineLine:   false, //显示曲线
-// 	CaptchaLen:       4,     //显示字符数
-// }
-
-// //声音验证码配置
-// var config_Audio = base64Captcha.DriverAudio{
-// 	Length:   4,    //显示字符数
-// 	Language: "zh", //语言
-// }
-
 /*
 数字验证码
 */
