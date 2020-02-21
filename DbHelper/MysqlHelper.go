@@ -25,7 +25,7 @@ func MySqlDb() *xorm.Engine {
 	_user := beego.AppConfig.String("database_mysql::db_user")
 	//数据库密码
 	_password := beego.AppConfig.String("database_mysql::db_password")
-	//数据库密码
+	//数据库表前缀
 	_prefix := beego.AppConfig.String("database_mysql::db_prefix")
 	//连接字符串
 	_connString := fmt.Sprintf("%s:%s@(%s:%s)/%s?charset=utf8", _user, _password, _server, _port, _database)
