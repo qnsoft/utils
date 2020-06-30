@@ -30,21 +30,21 @@ func ConnectionDb() (*mgo.Database, *mgo.Session) {
 /*
 *@数据库关闭
  */
-func ColoseDb() {
-	_, session := ConnectionDb()
-	defer session.Close()
-}
+// func ColoseDb() {
+// 	_, session := ConnectionDb()
+// 	defer session.Close()
+// }
 
 /*
 *@获取单条信息
 *@_query查询条件表达式
  */
 func Single(_query map[string]interface{}, _model interface{}, _doc_name string) (interface{}, error) {
-	db, _ := ConnectionDb()
+	db, _session := ConnectionDb()
+	defer _session.Close()
 	_collec := db.C(_doc_name)
 	err := _collec.Find(_query).One(&_model)
 	ErrorHelper.CheckErr(err)
-	ColoseDb()
 	return _model, err
 }
 
@@ -55,13 +55,13 @@ func Single(_query map[string]interface{}, _model interface{}, _doc_name string)
 *@_sort排序表达式
  */
 func List(_query interface{}, _doc_name string, _sort ...string) ([]interface{}, int, error) {
-	db, _ := ConnectionDb()
+	db, _session := ConnectionDb()
+	defer _session.Close()
 	_collec := db.C(_doc_name)
 	_info_list := make([]interface{}, 20)
 	err := _collec.Find(_query).Sort(_sort...).All(&_info_list)
 	ErrorHelper.CheckErr(err)
 	_total := len(_info_list)
-	ColoseDb()
 	return _info_list, _total, err
 }
 
@@ -74,7 +74,8 @@ func List(_query interface{}, _doc_name string, _sort ...string) ([]interface{},
 *@_sort排序表达式
  */
 func List_Page(page_on, page_size int, _query map[string]interface{}, _doc_name string, _sort ...string) ([]interface{}, int, error) {
-	db, _ := ConnectionDb()
+	db, _session := ConnectionDb()
+	defer _session.Close()
 	_collec := db.C(_doc_name)
 	info_list_count := make([]interface{}, 20)
 	err1 := _collec.Find(_query).All(&info_list_count)
@@ -83,7 +84,6 @@ func List_Page(page_on, page_size int, _query map[string]interface{}, _doc_name 
 	_info_list := make([]interface{}, 20)
 	err2 := _collec.Find(_query).Sort(_sort...).Limit(page_size).Skip(page_size * (page_on - 1)).All(&_info_list)
 	ErrorHelper.CheckErr(err2)
-	ColoseDb()
 	return _info_list, _total, err2
 }
 
@@ -92,11 +92,11 @@ func List_Page(page_on, page_size int, _query map[string]interface{}, _doc_name 
 *@doc添加内容对象
  */
 func Insert(doc interface{}, _doc_name string) error {
-	db, _ := ConnectionDb()
+	db, _session := ConnectionDb()
+	defer _session.Close()
 	_collec := db.C(_doc_name)
 	err := _collec.Insert(&doc)
 	ErrorHelper.CheckErr(err)
-	ColoseDb()
 	return err
 }
 
@@ -106,11 +106,11 @@ func Insert(doc interface{}, _doc_name string) error {
 *@edit_doc修改内容表达式
  */
 func Update(_query interface{}, edit_doc interface{}, _doc_name string) error {
-	db, _ := ConnectionDb()
+	db, _session := ConnectionDb()
+	defer _session.Close()
 	_collec := db.C(_doc_name)
 	err := _collec.Update(_query, edit_doc)
 	ErrorHelper.CheckErr(err)
-	ColoseDb()
 	return err
 }
 
@@ -119,10 +119,10 @@ func Update(_query interface{}, edit_doc interface{}, _doc_name string) error {
 *@_query删除条件表达式
  */
 func Delede(_query interface{}, _doc_name string) error {
-	db, _ := ConnectionDb()
+	db, _session := ConnectionDb()
+	defer _session.Close()
 	_collec := db.C(_doc_name)
 	err := _collec.Remove(_query)
 	ErrorHelper.CheckErr(err)
-	ColoseDb()
 	return err
 }

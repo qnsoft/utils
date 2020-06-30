@@ -12,7 +12,7 @@ import (
 func CheckErr(err error) {
 	if err != nil {
 		fmt.Println(err)
-		logger.Warn(err)
+		//logger.Warn(err)
 		//logger.Trace("this is Trace")
 		//logger.Debug("this is Debug")
 		//logger.Info("this is Info")
